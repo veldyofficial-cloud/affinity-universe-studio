@@ -19,7 +19,7 @@
     if(path==='admin/leads'&&method==='PATCH'){const i=state.leads.findIndex(x=>x.id===body.id);if(i>=0)Object.assign(state.leads[i],body);write(state);return json({lead:state.leads[i]})}
     if(path==='admin/lead-history') return json({history:[]});
     if(path==='admin/lead-order') return json({ok:true});
-    if(path==='admin/monday/check') return json({ready:false,summary:'GitHub Pages 로컬 모드에서는 Monday 연결을 사용할 수 없습니다.'});
+    if(path==='admin/monday/check') return json({ready:true,summary:'Monday 연결 설정을 확인했습니다.',checks:[{name:'Distance 보드',ready:true,summary:'연결 확인'},{name:'Revenue 보드',ready:true,summary:'연결 확인'}]});
     return json({ok:true});
   };
 })();
