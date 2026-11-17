@@ -11,7 +11,10 @@
     <div id="app"><p style="padding:40px">Studio를 불러오는 중입니다…</p></div>
     <div id="toast" role="status"></div>
     <dialog id="modal"></dialog>
-    <script src="src/mock.js"></script>
+    <script>
+      // GitHub Pages has no server: load the localStorage API stand-in only there.
+      if (location.hostname.endsWith('github.io')) document.write('<script src="src/mock.js"><\/script>');
+    </script>
     <script src="src/app.js"></script>
   </body>
 </html>

@@ -1,0 +1,14 @@
+{
+  "name": "affinity-universe-studio",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "dev": "node scripts/dev-server.mjs",
+    "test": "node test/harness.mjs",
+    "import-backup": "node scripts/import-backup.mjs"
+  },
+  "dependencies": {
+    "@vercel/blob": "2.8.2"
+  }
+}

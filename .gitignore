@@ -1,0 +1,7 @@
+node_modules/
+.local-data/
+.vercel/
+.env*
+test/.tmp/
+test/screens/
+dist/

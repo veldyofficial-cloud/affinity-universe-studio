@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>관리자 로그인 · AFFINITY UNIVERSE Studio</title>
+    <link rel="stylesheet" href="/public/style.css" />
+    <style>
+      .login-wrap{max-width:420px;margin:0 auto;padding:60px 20px}
+      .login-wrap label{display:block;margin:16px 0 6px;font-size:13px}
+      .login-wrap .err{color:#b00020;font-size:13px;min-height:20px;margin-top:12px}
+    </style>
+  </head>
+  <body>
+    <main class="login-wrap">
+      <section class="panel">
+        <div class="eyebrow">AFFINITY WORKSPACE</div>
+        <h1 style="margin:8px 0 4px">관리자 로그인</h1>
+        <p class="hint" id="state">승인된 직원만 사용할 수 있습니다.</p>
+        <form id="loginForm">
+          <label for="password">관리자 비밀번호 *</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" required maxlength="200" />
+          <label for="name">담당자 이름 (변경 이력 표시용, 선택)</label>
+          <input id="name" name="name" maxlength="40" autocomplete="name" />
+          <button class="primary" type="submit">로그인</button>
+          <p class="err" id="error" role="alert"></p>
+        </form>
+        <button class="light" id="logout" type="button" hidden>로그아웃</button>
+      </section>
+    </main>
+    <script>
+      const next = (() => {
+        const n = new URLSearchParams(location.search).get('next') || '/';
+        return n.startsWith('/') && !n.startsWith('//') ? n : '/';
+      })();
+      fetch('/api/public').then((r) => r.json()).then((r) => {
+        if (r.admin) {
+          document.getElementById('state').textContent = '이미 로그인되어 있습니다.';
+          document.getElementById('logout').hidden = false;
+        }
+      }).catch(() => {});
+      document.getElementById('loginForm').onsubmit = async (e) => {
+        e.preventDefault();
+        const f = new FormData(e.target), btn = e.target.querySelector('button');
+        btn.disabled = true;
+        document.getElementById('error').textContent = '';
+        try {
+          const res = await fetch('/api/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: f.get('password'), name: f.get('name') }) });
+          const r = await res.json();
+          if (!res.ok) throw Error(r.error || '로그인하지 못했습니다.');
+          location.href = next;
+        } catch (err) {
+          document.getElementById('error').textContent = err.message;
+          btn.disabled = false;
+        }
+      };
+      document.getElementById('logout').onclick = async () => {
+        await fetch('/api/logout', { method: 'POST' });
+        location.reload();
+      };
+    </script>
+  </body>
+</html>

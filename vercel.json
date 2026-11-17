@@ -1,0 +1,60 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "node scripts/build-static.mjs",
+  "outputDirectory": "dist",
+  "functions": {
+    "api/router.js": {
+      "maxDuration": 60
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "/api/router?__path=:path*"
+    },
+    {
+      "source": "/admin/login",
+      "destination": "/login.html"
+    },
+    {
+      "source": "/consult",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/admin/console",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/admin/links",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/admin/public/:file*",
+      "destination": "/public/:file*"
+    },
+    {
+      "source": "/admin/src/:file*",
+      "destination": "/src/:file*"
+    },
+    {
+      "source": "/admin/assets/:file*",
+      "destination": "/assets/:file*"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    }
+  ]
+}
