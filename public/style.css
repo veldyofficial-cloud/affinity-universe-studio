@@ -24,3 +24,17 @@
 .funnel-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:20px 0}.funnel-cards .panel{padding:20px}@media(max-width:700px){.funnel-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .sync-destinations{display:grid;gap:7px;margin:12px 0}.sync-destinations>div{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px}.sync-destinations>div>strong{min-width:65px;font-size:12px}.sync-destinations .pill{padding:0;white-space:normal;text-align:left}.sync-destinations .hint{margin:3px 0;max-width:560px}td .sync-destinations{min-width:180px;margin:0 0 8px}
 
+dialog:has(#saveLead){width:min(960px,96vw);max-width:96vw}
+.inquiry-grid,.visitor .phonebody{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:start}
+.inquiry-grid .residence-fields,.inquiry-grid>div:has(textarea),.visitor .phonebody>:is(.primary,.hint,.eyebrow){grid-column:1/-1}
+.visitor,.visitor .phone{width:min(100%,1100px);max-width:1100px;margin-inline:auto}
+#saveLead,.visitor{font-family:Figtree,Arial,"Malgun Gothic",sans-serif;font-size:16px;line-height:1.5;color:#000}
+#saveLead :is(label,input,select,textarea,p,button),.visitor .phonebody :is(b,small,p,button){font-size:1rem;color:#000}
+#saveLead .primary,.visitor .primary{background:#F8D12E;color:#000;border-color:#071E34}
+.visitor .public-course{border-top:4px solid #0064FF}
+.visitor .public-course:nth-of-type(3n+2){border-color:#F75ED0}
+.visitor .public-course:nth-of-type(3n){border-color:#37B659}
+#saveLead .residence-fields{border-top:3px solid #F67A23}
+.residence-clock{display:grid;grid-template-columns:1fr 1fr;gap:12px;color:#000}
+@media(max-width:760px){.inquiry-grid,.visitor .phonebody{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:460px){.inquiry-grid,.visitor .phonebody{grid-template-columns:1fr}}
